@@ -1,0 +1,4 @@
+# ignore all files in the build/ directory
+addons/
+# ignore doc/notes.txt, but not doc/server/arch.txt
+*.txt
