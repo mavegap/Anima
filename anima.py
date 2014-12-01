@@ -147,10 +147,11 @@ class normal(bpy.types.Operator):
         return{"FINISHED"}
 
 
-
+addon_keymaps = []
 
 def register():
-    bpy.utils.register_module(__name__)
+    bpy.utils.register_class(Anima)
+    bpy.utils.register_class(Pose_library)
     
     #Toogle between Dopesheet and Graph Editor
     wm = bpy.context.window_manager
@@ -160,12 +161,27 @@ def register():
         kmi = km.keymap_items.new('wm.context_set_enum', 'TAB', 'PRESS', ctrl=True)
         kmi.properties.data_path = 'area.type'
         kmi.properties.value = 'DOPESHEET_EDITOR'
+
+        km = kc.keymaps.new(name='Dopesheet', space_type='DOPESHEET_EDITOR')
+        kmi = km.keymap_items.new('wm.context_set_enum', 'TAB', 'PRESS', ctrl=True)
+        kmi.properties.data_path = 'area.type'
+        kmi.properties.value = 'GRAPH_EDITOR'
+
+        km = kc.keymaps.new(name='Dopesheet', space_type='DOPESHEET_EDITOR')
+        kmi = km.keymap_items.new('wm.context_toggle_enum', 'TAB', 'PRESS', shift=True)
+        kmi.properties.data_path = 'space_data.mode'
+        kmi.properties.value_1 = 'ACTION'
+        kmi.properties.value_2 = 'DOPESHEET'
     
 def unregister():
-    bpy.utils.unregister_module(__name__)
+    bpy.utils.unregister_class(Anima)
+    bpy.utils.unregister_class(Pose_library)
     
     for km, kmi in addon_keymaps:
         km.keymap_items.remove(kmi)
     addon_keymaps.clear()
     
     clear_properties()
+
+if __name__ == "__main__":
+    register()
