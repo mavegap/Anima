@@ -1,3 +1,16 @@
+bl_info = {
+        "name": "Anima",
+        "description":"Custom animation panel for DaTinta Studio",
+        "author":"mauriciovegaperez@hotmail.com",
+        "version":(0,1),
+        "blender":(2,72,0),
+        "location":"UI panel",
+        "warning":"Work in progress",
+        "wiki_url":"",
+        "category": "Animation"
+        }
+
+
 import bpy
 
 ### pose library
@@ -156,6 +169,3 @@ def unregister():
     addon_keymaps.clear()
     
     clear_properties()
-    
-if __name__ == "__main__":
-    register()
