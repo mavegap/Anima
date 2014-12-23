@@ -91,7 +91,6 @@ class Pose_library(bpy.types.Panel):
 ### ANIMA 
 class Anima(bpy.types.Panel):
     bl_context = "posemode"
-    bl_options = {'DEFAULT_CLOSED'}
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_label = "Anima"
@@ -135,10 +134,15 @@ class silhouette(bpy.types.Operator):
     bl_label = "Silhouette"
     bl_idname = "button.silhouette"
     
+    @classmethod
+    def poll(cls, context):
+        return (context.object and context.object.type == 'ARMATURE' and context.object.pose)
+    
     def execute(self, context):
         bpy.context.scene.render.engine = 'BLENDER_RENDER'
         bpy.data.lamps['Lamp'].energy = 0.0 #hacerla para lamparas en general
         bpy.context.scene.game_settings.material_mode = 'GLSL'  # GLSL shading
+        bpy.data.worlds['World'].horizon_color = (1,1,1) # Horizont color to white
         for area in bpy.context.screen.areas: # iterate through areas in current screen
             if area.type == 'VIEW_3D':
                 for space in area.spaces: # iterate through spaces in current VIEW_3D area
@@ -159,9 +163,9 @@ class normal(bpy.types.Operator):
                     if space.type == 'VIEW_3D': # check if space is a 3D view
                         space.viewport_shade = 'SOLID' # set the viewport shading to rendered
         bpy.data.lamps['Lamp'].energy = 1.0 #hacerla para lamparas en general 
-        
+        bpy.data.worlds['World'].horizon_color = (0.05087608844041824, 0.05087608844041824, 0.05087608844041824) # Horizont color to gray
         bpy.context.scene.render.engine = 'CYCLES'
-                           
+                         
         return{"FINISHED"}
 
 
@@ -170,6 +174,8 @@ addon_keymaps = []
 def register():
     bpy.utils.register_class(Anima)
     bpy.utils.register_class(Pose_library)
+    bpy.utils.register_class(silhouette)
+    bpy.utils.register_class(normal)
     
     #Toogle between Dopesheet and Graph Editor
     wm = bpy.context.window_manager
@@ -194,12 +200,14 @@ def register():
 def unregister():
     bpy.utils.unregister_class(Anima)
     bpy.utils.unregister_class(Pose_library)
+    bpy.utils.unregister_class(silhouette)
+    bpy.utils.unregister_class(normal)
     
     for km, kmi in addon_keymaps:
         km.keymap_items.remove(kmi)
     addon_keymaps.clear()
     
-    clear_properties()
+    ##clear_properties()
 
 if __name__ == "__main__":
     register()
