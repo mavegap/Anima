@@ -117,6 +117,12 @@ class Anima(bpy.types.Panel):
         row.prop(context.tool_settings, "use_keyframe_insert_auto", text="", toggle=True)
         row.prop(context.user_preferences.edit, "keyframe_new_interpolation_type", text="")
         
+        # Transforms Orientation
+        view = context.space_data
+        orientation = view.current_orientation
+        row = layout.row(align=True)
+        row.prop(view, "transform_orientation", text="")
+        
         # Silhouette
         row = layout.row(align=True)
         row.operator("button.silhouette")
