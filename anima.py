@@ -1,7 +1,25 @@
+# BEGIN GPL LICENSE BLOCK #####
+#
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License
+#  as published by the Free Software Foundation; version 2
+#  of the License.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software Foundation,
+#  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+# END GPL LICENSE BLOCK #####
+
 bl_info = {
         "name": "Anima",
         "description":"Custom animation panel for DaTinta Studio",
-        "author":"mauriciovegaperez@hotmail.com",
+        "author":"Mauricio Vega",
         "version":(0,1),
         "blender":(2,72,0),
         "location":"UI panel",
@@ -105,12 +123,12 @@ class Anima(bpy.types.Panel):
         row.operator("button.silhouette")
         row.operator("button.normal")
 
-        #
+        #Inbetweens buttons
         col = layout.column(align=True)
         row = col.row()
         row.operator("pose.push", text="Push")
         row.operator("pose.relax", text="Relax")
-        row.operator("pose.breakdown", text="Breakdowner") 
+        row.operator("pose.breakdown", text="Break") 
 
 # ANIMA - Apply Silhoutte view
 class silhouette(bpy.types.Operator):
@@ -185,3 +203,4 @@ def unregister():
 
 if __name__ == "__main__":
     register()
+
