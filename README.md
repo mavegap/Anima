@@ -1,7 +1,7 @@
 Anima
 ========
 
-Custom Animation Blender addon for DaTinta Studio
+Custom Animation Blender addon for [DaTinta Studio](http://www.datintastudio.com)
 
 ##Features:
 - silhouette mode
@@ -10,6 +10,7 @@ Custom Animation Blender addon for DaTinta Studio
 
 ###Disclamer
 It borrows some code from the following addons:
+
 Amaranth Toolset - Pablo Vasquez [More Info](https://github.com/venomgfx/amaranth)
 
 Freen's Animation Tools - Beorn Leonard [More Info](https://github.com/sambler/myblendercontrib/blob/master/animation_freens_tools.py)
